@@ -103,7 +103,6 @@ while choice != "Q":
         req_list[specify_number_of_item_to_be_marked][3] = 'c'
         print("{} marked as completed".format(req_list[specify_number_of_item_to_be_marked][0]))
 
-
     else:
         print("Invalid option")
     print(MENU)
