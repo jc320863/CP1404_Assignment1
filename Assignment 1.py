@@ -5,9 +5,8 @@ Started 2/9/2016
 Shopping list: https://github.com/jc320863/CP1404_Assignment1/commit/db0d7ceda9f38323df84d08bf28911b8c6170961
 """
 
-import csv
-
 def main():
+    import csv
     items_list = load_items()
 
     print("Shopping list 1.0 - Caleb Zappala \n{} items loaded from items.csv".format(len(items_list)))
@@ -21,19 +20,7 @@ def main():
             display_required_items(items_list)
 
         elif choice == "C":
-            total_cost_comp = 0
-            comp_list = []
-            for com_items in range(0, len(items_list)):
-                if items_list[com_items][3] == 'c':
-                    comp_list.append(items_list[com_items])
-                    total_cost_comp += float(items_list[com_items][1])
-            if len(comp_list) == 0:
-                print("No completed items")
-            else:
-                for completed in range(0, len(comp_list)):
-                    print("{}. {:15} ${:6.2f} ({})".format(completed, comp_list[completed][0],
-                                                           float(comp_list[completed][1]), comp_list[completed][2]))
-                    print("The total expected price for {} items is ${}".format(len(comp_list), total_cost_comp))
+            display_completed_items(items_list)
 
         elif choice == "A":
             import csv
@@ -111,6 +98,22 @@ def main():
         export.writerow(item)
 
 
+def display_completed_items(items_list):
+    total_cost_comp = 0
+    comp_list = []
+    for com_items in range(0, len(items_list)):
+        if items_list[com_items][3] == 'c':
+            comp_list.append(items_list[com_items])
+            total_cost_comp += float(items_list[com_items][1])
+    if len(comp_list) == 0:
+        print("No completed items")
+    else:
+        for completed in range(0, len(comp_list)):
+            print("{}. {:15} ${:6.2f} ({})".format(completed, comp_list[completed][0],
+                                                   float(comp_list[completed][1]), comp_list[completed][2]))
+            print("The total expected price for {} items is ${}".format(len(comp_list), total_cost_comp))
+
+
 def display_required_items(items_list):
     total_cost_req = 0
     req_list = []
@@ -124,7 +127,7 @@ def display_required_items(items_list):
         for num in range(0, len(req_list)):
             print("{}. {:15} ${:6.2f} ({})".format(num, req_list[num][0], float(req_list[num][1]),
                                                    req_list[num][2]))
-        print("The total expected price for {} items is ${}".format(len(req_list), total_cost_req))
+        print("The total expected price for {} items is ${}".format(len(req_list), float(total_cost_req)))
 
 
 def load_items():
@@ -136,6 +139,5 @@ def load_items():
         items_list.append(row)
     items_list = sorted(items_list, key=lambda items_list: items_list[2])
     return items_list
-
 
 main()
