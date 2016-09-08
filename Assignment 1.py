@@ -35,8 +35,8 @@ function display_completed_items
 """
 import csv
 
-def main():
 
+def main():
     items_list = load_items()
 
     print("Shopping list 1.0 - Caleb Zappala \n{} items loaded from items.csv".format(len(items_list)))
@@ -59,20 +59,7 @@ def main():
         elif choice == "M":
             req_list = display_required_items(items_list)
             if len(req_list) != 0:
-                print("Enter the number of items to be completed ")
-                while True:
-                    try:
-                        specify_number_of_item_to_be_marked = int(input(">>> "))
-
-                        if specify_number_of_item_to_be_marked >= 0 and specify_number_of_item_to_be_marked < len(req_list):
-                            break
-                        else:
-                            print("Invalid item number ")
-                    except ValueError:
-                        print("Invalid input; enter a number")
-                req_list[specify_number_of_item_to_be_marked][3] = 'c'
-                print("{} marked as completed".format(req_list[specify_number_of_item_to_be_marked][0]))
-
+                marking_item_as_completed(req_list)
         else:
             print("Invalid menu choice")
         print(menu)
@@ -80,6 +67,24 @@ def main():
     print("{} items saved to item.csv\nHave a nice day :P".format(len(items_list)))
 
     save_items(items_list)
+
+
+def marking_item_as_completed(req_list):
+    print("Enter the number of items to be completed ")
+    while True:
+        try:
+            specify_number_of_item_to_be_marked = int(input(">>> "))
+
+            if specify_number_of_item_to_be_marked >= 0 and specify_number_of_item_to_be_marked < len(
+                    req_list):
+                break
+            else:
+                print("Invalid item number ")
+        except ValueError:
+            print("Invalid input; enter a number")
+    req_list[specify_number_of_item_to_be_marked][3] = 'c'
+    print("{} marked as completed".format(req_list[specify_number_of_item_to_be_marked][0]))
+
 
 def add_new_item(items_list):
     new_item = [0, '0', 0, 0]
@@ -114,10 +119,12 @@ def add_new_item(items_list):
     items_list = sorted(items_list, key=lambda items_list: items_list[2])
     return items_list
 
+
 def save_items(items_list):
     save_item = csv.writer(open("items.csv", 'w', newline=''))
     for item in items_list:
         save_item.writerow(item)
+
 
 def display_completed_items(items_list):
     total_cost_completed = 0
@@ -133,6 +140,7 @@ def display_completed_items(items_list):
             print("{}. {:15} ${:6.2f} ({})".format(completed, comp_list[completed][0],
                                                    float(comp_list[completed][1]), comp_list[completed][2]))
         print("The total expected price for {} items is ${}".format(len(comp_list), total_cost_completed))
+
 
 def display_required_items(items_list):
     total_cost_req = 0
@@ -150,6 +158,7 @@ def display_required_items(items_list):
         print("The total expected price for {} items is ${}".format(len(required_list), float(total_cost_req)))
     return required_list
 
+
 def load_items():
     items_list = []
     file_open = csv.reader(open("items.csv"))
@@ -157,5 +166,6 @@ def load_items():
         items_list.append(row)
     items_list = sorted(items_list, key=lambda items_list: items_list[2])
     return items_list
+
 
 main()
