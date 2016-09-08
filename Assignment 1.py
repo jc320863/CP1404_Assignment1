@@ -4,9 +4,8 @@ Caleb Zappala
 Started 2/9/2016
 Shopping list: https://github.com/jc320863/CP1404_Assignment1/commit/db0d7ceda9f38323df84d08bf28911b8c6170961
 """
-
+import csv
 def main():
-    import csv
     items_list = load_items()
 
     print("Shopping list 1.0 - Caleb Zappala \n{} items loaded from items.csv".format(len(items_list)))
@@ -23,40 +22,7 @@ def main():
             display_completed_items(items_list)
 
         elif choice == "A":
-            import csv
-
-            new_item = [0, '0', 0, 0]
-            new_item[3] = 'r'
-            new_item[0] = str(input("Item name: ").strip())
-            while new_item[0] == "":
-                print("Input can not be blank")
-                new_item[0] = str(input("Item name: ").strip())
-            else:
-                while True:
-                    try:
-                        new_item[1] = str(input("Price: $ "))
-
-                        if float(new_item[1]) >= 0:
-                            break
-                        else:
-                            print("Price must be >= $0 ")
-                    except ValueError:
-                        print("Invalid input; enter a valid number")
-
-                while True:
-                    try:
-                        new_item[2] = str(input("Priority: "))
-                        if int(new_item[2]) >= 1 and int(new_item[2]) <= 3:
-                            break
-                        else:
-                            print("Priority must be 1, 2 or 3")
-                    except ValueError:
-                        print("That is not a Integer")
-            print("{}, ${} (priority{}) added to shopping list".format(new_item[0], new_item[1], new_item[2]))
-            items_list.append(new_item)
-            items_list = sorted(items_list, key=lambda items_list: items_list[2])
-
-
+            items_list = add_new_item(items_list)
 
         elif choice == "M":
             total_cost_req = 0
@@ -93,6 +59,44 @@ def main():
         choice = input(">>> ").upper()
     print("{} items saved to item.csv\nHave a nice day :P".format(len(items_list)))
 
+    save_items(items_list)
+
+
+def add_new_item(items_list):
+    new_item = [0, '0', 0, 0]
+    new_item[3] = 'r'
+    new_item[0] = str(input("Item name: ").strip())
+    while new_item[0] == "":
+        print("Input can not be blank")
+        new_item[0] = str(input("Item name: ").strip())
+    else:
+        while True:
+            try:
+                new_item[1] = str(input("Price: $ "))
+
+                if float(new_item[1]) >= 0:
+                    break
+                else:
+                    print("Price must be >= $0 ")
+            except ValueError:
+                print("Invalid input; enter a valid number")
+
+        while True:
+            try:
+                new_item[2] = str(input("Priority: "))
+                if int(new_item[2]) >= 1 and int(new_item[2]) <= 3:
+                    break
+                else:
+                    print("Priority must be 1, 2 or 3")
+            except ValueError:
+                print("That is not a Integer")
+    print("{}, ${} (priority{}) added to shopping list".format(new_item[0], new_item[1], new_item[2]))
+    items_list.append(new_item)
+    items_list = sorted(items_list, key=lambda items_list: items_list[2])
+    return items_list
+
+
+def save_items(items_list):
     export = csv.writer(open("List.csv", 'w', newline=''))
     for item in items_list:
         export.writerow(item)
