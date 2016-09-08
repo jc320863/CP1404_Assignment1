@@ -80,8 +80,8 @@ def add_new_item(items_list):
                 else:
                     print("Priority must be 1, 2 or 3")
             except ValueError:
-                print("That is not a Integer")
-    print("{}, ${} (priority{}) added to shopping list".format(new_item[0], new_item[1], new_item[2]))
+                print("Invalid input; enter a valid number")
+    print("{}, ${} (priority {}) added to shopping list".format(new_item[0], new_item[1], new_item[2]))
     items_list.append(new_item)
     items_list = sorted(items_list, key=lambda items_list: items_list[2])
     return items_list
@@ -104,7 +104,7 @@ def display_completed_items(items_list):
         for completed in range(0, len(comp_list)):
             print("{}. {:15} ${:6.2f} ({})".format(completed, comp_list[completed][0],
                                                    float(comp_list[completed][1]), comp_list[completed][2]))
-            print("The total expected price for {} items is ${}".format(len(comp_list), total_cost_comp))
+        print("The total expected price for {} items is ${}".format(len(comp_list), total_cost_comp))
 
 def display_required_items(items_list):
     total_cost_req = 0
