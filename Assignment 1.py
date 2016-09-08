@@ -18,20 +18,7 @@ def main():
 
     while choice != "Q":
         if choice == "R":
-            total_cost_req = 0
-            req_list = []
-            for item in range(0, len(items_list)):
-                if items_list[item][3] == 'r':
-                    req_list.append(items_list[item])
-                    total_cost_req += float(items_list[item][1])
-            if len(req_list) == 0:
-                print("No Required items")
-            else:
-                for num in range(0, len(req_list)):
-                    print("{}. {:15} ${:6.2f} ({})".format(num, req_list[num][0], float(req_list[num][1]),
-                                                           req_list[num][2]))
-                print("The total expected price for {} items is ${}".format(len(req_list), total_cost_req))
-
+            display_required_items(items_list)
 
         elif choice == "C":
             total_cost_comp = 0
@@ -47,7 +34,6 @@ def main():
                     print("{}. {:15} ${:6.2f} ({})".format(completed, comp_list[completed][0],
                                                            float(comp_list[completed][1]), comp_list[completed][2]))
                     print("The total expected price for {} items is ${}".format(len(comp_list), total_cost_comp))
-
 
         elif choice == "A":
             import csv
@@ -105,8 +91,7 @@ def main():
                     try:
                         specify_number_of_item_to_be_marked = int(input(">>> "))
 
-                        if specify_number_of_item_to_be_marked >= 0 and specify_number_of_item_to_be_marked < len(
-                                req_list):
+                        if specify_number_of_item_to_be_marked >= 0 and specify_number_of_item_to_be_marked < len(req_list):
                             break
                         else:
                             print("Invalid item number ")
@@ -124,6 +109,22 @@ def main():
     export = csv.writer(open("List.csv", 'w', newline=''))
     for item in items_list:
         export.writerow(item)
+
+
+def display_required_items(items_list):
+    total_cost_req = 0
+    req_list = []
+    for item in range(0, len(items_list)):
+        if items_list[item][3] == 'r':
+            req_list.append(items_list[item])
+            total_cost_req += float(items_list[item][1])
+    if len(req_list) == 0:
+        print("No Required items")
+    else:
+        for num in range(0, len(req_list)):
+            print("{}. {:15} ${:6.2f} ({})".format(num, req_list[num][0], float(req_list[num][1]),
+                                                   req_list[num][2]))
+        print("The total expected price for {} items is ${}".format(len(req_list), total_cost_req))
 
 
 def load_items():
