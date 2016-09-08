@@ -1,3 +1,10 @@
+"""
+CP1404/Assignment 1 2016
+Caleb Zappala
+Started 2/9/2016
+Shopping list: https://github.com/jc320863/CP1404_Assignment1/commit/db0d7ceda9f38323df84d08bf28911b8c6170961
+"""
+
 import csv
 items_list = []
 
