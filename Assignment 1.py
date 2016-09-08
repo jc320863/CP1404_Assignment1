@@ -89,9 +89,10 @@ while choice != "Q":
             print("{}. {:15} ${:6.2f} ({})".format(num, req_list[num][0], float(req_list[num][1]), req_list[num][2]))
         print("The total expected price for {} items is ${}".format(len(req_list), total_cost_req))
 
+        print("Enter the number of items to be completed ")
         while True:
             try:
-                specify_number_of_item_to_be_marked = int(input("Enter the number of items to be completed "))
+                specify_number_of_item_to_be_marked = int(input(">>> "))
 
                 if specify_number_of_item_to_be_marked >= 0 and specify_number_of_item_to_be_marked < len(req_list):
                     break
