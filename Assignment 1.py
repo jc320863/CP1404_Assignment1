@@ -75,8 +75,7 @@ def marking_item_as_completed(req_list):
         try:
             specify_number_of_item_to_be_marked = int(input(">>> "))
 
-            if specify_number_of_item_to_be_marked >= 0 and specify_number_of_item_to_be_marked < len(
-                    req_list):
+            if specify_number_of_item_to_be_marked >= 0 and specify_number_of_item_to_be_marked < len(req_list):
                 break
             else:
                 print("Invalid item number ")
