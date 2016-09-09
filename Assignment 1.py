@@ -17,20 +17,20 @@ function load_items()
     return items list
 
 function display_completed_items
-    create new variable total_cost_comp and let equal to zero
-    create blank list called comp_list
+    create new variable total_cost_completed and let equal to zero
+    create blank list called completed_list
     for items in range from zero to length of initial items list
         if within initial items, referencing a list within a list, check the fourth coloum and see if the string 'c'
                                                             is present
             add the items to the comp list from the initial items list
-            total_cost_comp = float of total_cost_comp + cost of item in items list
-    if len of comp_list is equal to zero(therfore a empty list is present)
+            total_cost_completed = float of total_cost_completed + cost of item in items list
+    if len of completed_list is equal to zero(therfore a empty list is present)
         print No completed items
     else:
         for completed in range from zero to length of comp_list
-            print formatted string with completed, comp_list zero, comp_list one, comp_list two
-        print formatted string for total expected price with a format for the length of comp_list and the variable
-         total_cost_com
+            print formatted string with completed, completed_list zero, completed_list one, completed_list two
+        print formatted string for total expected price with a format for the length of completed_list and the variable
+         total_cost_completed
 
 """
 import csv
@@ -127,18 +127,18 @@ def save_items(items_list):
 
 def display_completed_items(items_list):
     total_cost_completed = 0
-    comp_list = []
+    completed_list = []
     for com_items in range(0, len(items_list)):
         if items_list[com_items][3] == 'c':
-            comp_list.append(items_list[com_items])
+            completed_list.append(items_list[com_items])
             total_cost_completed += float(items_list[com_items][1])
-    if len(comp_list) == 0:
+    if len(completed_list) == 0:
         print("No completed items")
     else:
-        for completed in range(0, len(comp_list)):
-            print("{}. {:15} ${:6.2f} ({})".format(completed, comp_list[completed][0],
-                                                   float(comp_list[completed][1]), comp_list[completed][2]))
-        print("The total expected price for {} items is ${}".format(len(comp_list), total_cost_completed))
+        for completed in range(0, len(completed_list)):
+            print("{}. {:15} ${:6.2f} ({})".format(completed, completed_list[completed][0],
+                                                   float(completed_list[completed][1]), completed_list[completed][2]))
+        print("The total expected price for {} items is ${}".format(len(completed_list), total_cost_completed))
 
 
 def display_required_items(items_list):
